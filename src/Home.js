@@ -37,8 +37,8 @@ function Home() {
               key: key,
             });
 
-            setCode(`https://hometask-a2f16.web.app/l/${code}`);
-            // setCode(`http://localhost:3000/l/${code}`);
+            //setCode(`https://hometask-a2f16.web.app/l/${code}`);
+            setCode(`http://localhost:3000/l/${code}`);
           });
       });
   };
