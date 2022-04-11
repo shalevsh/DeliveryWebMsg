@@ -17,5 +17,5 @@
 ![CSS Icon](https://i.ibb.co/b3QNSgX/css-logo.png, "CSS")
 ![JavaScript Icon](https://i.ibb.co/L5RS8g1/Group-11.png, "JavaScript")
 ![React Icon](https://i.ibb.co/BBFKyz9/Group-9.png, "React")
-![Firebase Icon](https://ibb.co/F8ZLgZR/icons8-firebase-48.png, "Firebase")
+![Firebase Icon](https://ibb.co/F8ZLgZR/, "Firebase")
 
