@@ -4,10 +4,11 @@ import { v4 as uuidv4 } from "uuid";
 import "./Home.css";
 import { IconButton } from "@material-ui/core";
 import { Send } from "@material-ui/icons";
-function randomString(length=6) {
-  const chars = ['0','1','2','3','4','5','6','7','8','9']
-  let result = '';
-  for (let i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+function randomString(length = 6) {
+  const chars = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+  let result = "";
+  for (let i = length; i > 0; --i)
+    result += chars[Math.floor(Math.random() * chars.length)];
   return result;
 }
 let loadingInterval = null;
@@ -18,43 +19,39 @@ function Home() {
 
   const [file, setFile] = useState("");
   const [key, setKey] = useState("");
-  const [loadingText,setLoadingText] = useState("");
+  const [loadingText, setLoadingText] = useState("");
 
-  const startLoading = ()=>{
-    console.log('here')
-    setLoadingText("Loading.")
+  const startLoading = () => {
+    console.log("here");
+    setLoadingText("Loading.");
     loadingInterval = setInterval(() => {
-      setLoadingText(prev =>{
-        let loadingStr = prev +'.';
-        if(loadingStr == 'Loading....')
-        loadingStr= 'Loading.'
-        console.log('in interval',loadingStr)
+      setLoadingText((prev) => {
+        let loadingStr = prev + ".";
+        if (loadingStr == "Loading....") loadingStr = "Loading.";
+        console.log("in interval", loadingStr);
         return loadingStr;
-
-      })
+      });
     }, 500);
+  };
 
-  }
-
-  const stopLoading = ()=>{
-    
-    setLoadingText("")
-    console.log('interval',loadingInterval)
-    clearInterval(loadingInterval)
-  }
+  const stopLoading = () => {
+    setLoadingText("");
+    console.log("interval", loadingInterval);
+    clearInterval(loadingInterval);
+  };
 
   const upload = async () => {
     if (file == null && key == null) return;
     setUrl("Getting Download Link...");
     // Sending File to Firebase Storage
-    startLoading()
+    startLoading();
     app
       .storage()
       .ref(`/files/${file.name}`)
       .put(file)
       .on("state_changed", null, null, () => {
         // Getting Download Link
-     
+
         app
           .storage()
           .ref("files")
@@ -65,8 +62,8 @@ function Home() {
             let code = uuidv4();
             let key = randomString();
             setKey(key);
-                 
-            console.log(code)
+
+            console.log(code);
             await app.firestore().collection("urls").add({
               url: url,
               code: code,
@@ -75,18 +72,17 @@ function Home() {
 
             setCode(`https://hometask-a2f16.web.app/l/${code}`);
             //setCode(`http://localhost:3000/l/${code}`);
-            stopLoading()
+            stopLoading();
           });
       });
   };
- 
+
   return (
-    <div>
+    <div id="home">
       <div className="home__center">
         <h1>Upload File</h1>
       </div>
       <div className="container">
-        
         <input
           type="file"
           className="form-control"
@@ -94,11 +90,13 @@ function Home() {
             setFile(e.target.files[0]);
           }}
         />
-        
+
         <br />
-        <button className="btn btn-primary" onClick={upload}>
-          Submit
-        </button>
+        <center>
+          <button className="btn btn-primary" onClick={upload}>
+            Submit
+          </button>
+        </center>
       </div>
       <br />
       <br />
@@ -111,10 +109,9 @@ function Home() {
             </a>
           </h3>
           {key != "" && <h2>your random key is {key}</h2>}
-  
         </div>
       )}
-      {loadingText !="" && <h1>{loadingText}</h1>}
+      {loadingText != "" && <h1>{loadingText}</h1>}
     </div>
   );
 }

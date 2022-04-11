@@ -35,14 +35,16 @@ function GoLink() {
   };
 
   return (
-    <div className="container">
+    <div id="home" className="container">
       <div>
         <div id="result" style={{ display: "none" }}>
           <h1>Your File Is Ready To Download</h1>
 
-          <a href={fileLink.url} className="btn btn-success" target="_blank">
-            Download
-          </a>
+          <center>
+            <a href={fileLink.url} className="btn btn-success" target="_blank">
+              Download
+            </a>
+          </center>
         </div>
 
         <div id="input">
@@ -56,9 +58,11 @@ function GoLink() {
             onChange={(e) => setKey(e.target.value)}
           />
           <br />
-          <button className="btn btn-primary" onClick={() => checkkey()}>
-            Submit
-          </button>
+          <center>
+            <button className="btn btn-primary" onClick={() => checkkey()}>
+              Submit
+            </button>
+          </center>
         </div>
       </div>
     </div>
